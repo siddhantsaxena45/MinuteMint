@@ -173,13 +173,7 @@ export default function HomePage() {
         <div
           role="status"
           aria-live="polite"
-          style={{
-            marginTop: 12,
-            padding: '8px 12px',
-            background: '#1f2937',
-            color: 'white',
-            borderRadius: 6,
-          }}
+          className="toast"
         >
           {toast}
         </div>
@@ -201,7 +195,7 @@ export default function HomePage() {
           style={{ width: '100%', fontFamily: 'monospace' }}
           placeholder="Paste transcript here..."
         />
-        <div style={{ textAlign: 'right', color: '#6b7280' }}>
+        <div className="char-count">
           {transcriptChars.toLocaleString()} chars
         </div>
       </section>
@@ -285,7 +279,7 @@ export default function HomePage() {
         >
           {emailSending ? 'Sending…' : 'Send Email'}
         </button>
-        <p style={{ color: '#6b7280', marginTop: 6 }}>
+        <p className="tip">
           Tip: separate multiple emails with commas.
         </p>
       </section>
