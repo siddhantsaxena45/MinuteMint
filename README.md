@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 📋 AI Meeting Notes Summarizer  
 
-First, run the development server:
+An **AI-powered meeting summarizer** built with **Next.js**, **Google Gemini**, and **Nodemailer**.  
+Upload transcripts, generate structured summaries, and share via email in just a few clicks.  
 
+***
+
+## 🚀 Features
+- ✍️ Upload `.txt` transcripts or paste text directly  
+- 🤖 Summarize using **Google Gemini 1.5 Flash**  
+- 📝 Extract **action items, decisions, follow-ups, risks**  
+- ✏️ Interactive editor to refine AI output  
+- 📧 Send summaries via **Gmail SMTP**  
+- 🎯 Executive-style bullet point summaries  
+
+***
+
+## 🛠️ Tech Stack
+- **Frontend**: Next.js 13+, React, TypeScript  
+- **AI Model**: Google **Gemini 1.5 Flash** via `@google/genai`  
+- **Backend**: Next.js API Routes (server actions)  
+- **Email**: Nodemailer (Gmail with App Passwords)  
+
+***
+
+## ⚙️ Setup & Installation
+
+### 1. Clone Repository  
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/ai-meeting-notes.git
+cd ai-meeting-notes
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies  
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Configure Environment Variables  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a **.env.local** file in the project root:  
 
-## Learn More
+```bash
+# Google Gemini API
+GEMINI_API_KEY=your_gemini_api_key_here
 
-To learn more about Next.js, take a look at the following resources:
+# Gmail SMTP (App Passwords only - not your real password)
+GMAIL_USER=yourgmail@gmail.com
+GMAIL_APP_PASSWORD=your16charapppassword
+GMAIL_FROM="Your Name "
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🔑 **Secure your Gmail App Password** from [Google Account → Security → App Passwords].  
+It should be **16 characters long**.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+***
 
-## Deploy on Vercel
+### 4. Run Development Server  
+```bash
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+App runs at:  
+👉 [http://localhost:3000](http://localhost:3000)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+***
+
+## 📡 API Routes
+
+### `/api/summarize`  
+- Input: `{ text, instruction }`  
+- Output: Structured JSON:  
+```json
+{
+  "summary": "string",
+  "action_items": ["string"],
+  "decisions": ["string"],
+  "follow_ups": ["string"],
+  "risks": ["string"]
+}
+```
+
+### `/api/email`  
+- Input: `{ to: [emails], subject, text, html }`  
+- Output:  
+```json
+{ "success": true, "messageId": "..."}
+```
+
+***
+
+## 📖 Usage Guide
+1. Upload transcript or paste meeting notes  
+2. Enter instructions (e.g., _“Summarize in bullet points for executives”_)  
+3. Generate AI summary  
+4. Review & edit structured sections  
+5. Enter recipient emails and hit **Send Email**  
+
+***
+
+## 🛡️ Security Notes
+- Use **App Passwords** for Gmail, not your main Google password  
+- Always keep `.env.local` out of Git (already ignored by default)  
+- Gemini API calls stay server-side (`runtime = "nodejs"`)  
+
+***
+
+## 🧩 Future Improvements
+- ✅ Support PDF / DOCX upload  
+- ✅ Integration with Google Calendar / Slack  
+- ✅ Email scheduling and batch sending  
+- ✅ Store summaries in database for team review  
+
+
